@@ -1,0 +1,7 @@
+# Файлы Python
+__pycache__/
+
+
+# Логи (чтобы не попадали в репозиторий)
+logs/*.log
+!logs/.gitkeep

@@ -1,0 +1,493 @@
+{
+  "OPEN_DRONEPORT": {
+    "description": "Параллельно открыть крышу + поднять стол (CMD 22) → включить LED → открыть лапки (зарядка откл.)",
+    "abort_on_error": true,
+    "steps": [
+      {
+        "step_id": 1,
+        "type": "stm32_action",
+        "description": "Параллельное открытие крыши + подъём стола (CMD 22). STM32: PWM_MAX → шаги стола → ожидание концевика крыши → PWM_CENTER",
+        "action_code": 22,
+        "verify_hall": true,
+        "expected_hall_bit": 2,
+        "bit_value": 1,
+        "timeout_key": "open_and_raise",
+        "error_code": "TABLE_TIMEOUT"
+      },
+      {
+        "step_id": 2,
+        "type": "stm32_action",
+        "description": "Включить LED-ленту (подсветка посадочной площадки)",
+        "action_code": 7,
+        "verify_hall": false,
+        "timeout_key": "default",
+        "error_code": "ERROR_HEATING"
+      },
+      {
+        "step_id": 3,
+        "type": "stm32_action",
+        "description": "Открыть лапки (TB6600 №2 → 1 шаговик → 4 лапки через передачу). Зарядка отключается",
+        "action_code": 15,
+        "verify_hall": true,
+        "expected_hall_bit": 6,
+        "bit_value": 0,
+        "timeout_key": "open_clamps",
+        "error_code": "MECHANICS"
+      },
+      {
+        "step_id": 4,
+        "type": "send_server",
+        "description": "Отправить серверу: крыша открыта (RESULT_STATUS_SHUTTERS, CMD=30)",
+        "cmd": 30,
+        "data_source": { "shutters": 1 }
+      }
+    ]
+  },
+
+  "CLOSE_DRONEPORT": {
+    "description": "Закрыть лапки (зарядка вкл.) → выкл. LED → опустить стол → закрыть крышу. Строго обратный порядок",
+    "abort_on_error": true,
+    "steps": [
+      {
+        "step_id": 1,
+        "type": "stm32_action",
+        "description": "Закрыть лапки (TB6600 №2 реверс → 4 лапки сжимают БПЛА). При смыкании — зарядка через контакты лапок",
+        "action_code": 16,
+        "verify_hall": true,
+        "expected_hall_bit": 6,
+        "bit_value": 1,
+        "timeout_key": "close_clamps",
+        "error_code": "MECHANICS"
+      },
+      {
+        "step_id": 2,
+        "type": "stm32_action",
+        "description": "Выключить LED-ленту",
+        "action_code": 8,
+        "verify_hall": false,
+        "timeout_key": "default"
+      },
+      {
+        "step_id": 3,
+        "type": "stm32_action",
+        "description": "Опустить стол (STEP/DIR → TB6600 №1 и TB6600 №2 реверс синхронно)",
+        "action_code": 14,
+        "verify_hall": true,
+        "expected_hall_bit": 3,
+        "bit_value": 1,
+        "timeout_key": "lower_table",
+        "error_code": "TABLE_TIMEOUT"
+      },
+      {
+        "step_id": 4,
+        "type": "stm32_action",
+        "description": "Закрыть крышу (PWM → ESC Hobbywing × 2 реверс синхронно)",
+        "action_code": 18,
+        "verify_hall": true,
+        "expected_hall_bit": 1,
+        "bit_value": 1,
+        "timeout_key": "close_roof",
+        "error_code": "SHUTTER_TIMEOUT"
+      },
+      {
+        "step_id": 5,
+        "type": "send_server",
+        "description": "Отправить серверу: крыша закрыта (RESULT_STATUS_SHUTTERS, CMD=30)",
+        "cmd": 30,
+        "data_source": { "shutters": 0 }
+      }
+    ]
+  },
+
+  "PRE_FLIGHT": {
+    "description": "Предполётная проверка: GPS фикс, исходное положение механики, связь с БПЛА, диагностика БПЛА",
+    "abort_on_error": true,
+    "sends_drone_comm": true,
+    "steps": [
+      {
+        "step_id": 1,
+        "type": "usb_sensor",
+        "description": "Ждать GPS фикс. Нет фикса → NAVIGATION ERROR + NACK(3)",
+        "sensor": "gps",
+        "store_as": "gps",
+        "timeout_key": "gps_fix",
+        "require_fix": true,
+        "error_code": "POSITION_LOST"
+      },
+      {
+        "step_id": 2,
+        "type": "stm32_request",
+        "description": "Запросить датчики Холла. Проверить исходное положение: крыша закрыта (бит 1=1), стол внизу (бит 3=1), лапки сжаты (бит 6=1)",
+        "system_part": 1,
+        "store_as": "hall",
+        "assert_bits": { "1": 1, "3": 1, "6": 1 },
+        "error_code": "MECHANICS"
+      },
+      {
+        "step_id": 3,
+        "type": "radio_command",
+        "description": "Отправить БПЛА команду PRE_FLIGHT (CMD=28)",
+        "cmd": 28,
+        "data_source": null
+      },
+      {
+        "step_id": 4,
+        "type": "wait_radio",
+        "description": "Ждать DIAG_RESULT (CMD=45) от БПЛА",
+        "expected_cmd": 45,
+        "timeout_key": "diag_result",
+        "store_as": "diag_result",
+        "error_code": "DRONE_NO_RESPONSE"
+      },
+      {
+        "step_id": 5,
+        "type": "send_server",
+        "description": "Отправить DIAG_RESULT серверу (CMD=45)",
+        "cmd": 45,
+        "data_source": "stored:diag_result"
+      }
+    ]
+  },
+
+  "DIAGNOSTIC": {
+    "description": "Диагностика всех подсистем дронпорта. abort_on_error=false — собрать максимум данных даже при частичных ошибках",
+    "abort_on_error": false,
+    "steps": [
+      {
+        "step_id": 1,
+        "type": "stm32_request",
+        "description": "Запросить датчики Холла: положение крыши (биты 0,1), стола (2,3), заслонок (4,5), лапок (6)",
+        "system_part": 1,
+        "store_as": "hall"
+      },
+      {
+        "step_id": 2,
+        "type": "stm32_request",
+        "description": "Запросить напряжение резервного АКБ 12В LiFePO4",
+        "system_part": 2,
+        "store_as": "voltage"
+      },
+      {
+        "step_id": 3,
+        "type": "stm32_request",
+        "description": "Запросить DHT22: температура и влажность внутри корпуса дронпорта",
+        "system_part": 3,
+        "store_as": "dht22"
+      },
+      {
+        "step_id": 4,
+        "type": "weather_request",
+        "description": "Запросить Arduino метеостанцию: 0x01 → 8 байт (wind_dir, wind_spd, temperature, humidity)",
+        "store_as": "weather",
+        "timeout_key": "weather"
+      },
+      {
+        "step_id": 5,
+        "type": "usb_sensor",
+        "description": "Запросить GPS VK-162: координаты дронпорта",
+        "sensor": "gps",
+        "store_as": "gps",
+        "timeout_key": "gps_fix"
+      },
+      {
+        "step_id": 6,
+        "type": "send_server",
+        "description": "Отправить RESULT_DIAGNOSTIC серверу (CMD=31)",
+        "cmd": 31,
+        "data_source": "stored:voltage,hall"
+      },
+      {
+        "step_id": 7,
+        "type": "send_server",
+        "description": "Отправить RESULT_EXTERNAL_PARAM серверу (CMD=33)",
+        "cmd": 33,
+        "data_source": "stored:dht22,weather"
+      }
+    ]
+  },
+
+  "DEMO_MODE": {
+    "description": "Демонстрационный полёт к цели (X,Y,Z int32 × 10^7) и автоматический возврат",
+    "abort_on_error": true,
+    "sends_drone_comm": true,
+    "steps": [
+      {
+        "step_id": 1,
+        "type": "sub_scenario",
+        "description": "Предполётная проверка",
+        "name": "PRE_FLIGHT"
+      },
+      {
+        "step_id": 2,
+        "type": "sub_scenario",
+        "description": "Открыть дронпорт: крыша → стол → LED → лапки",
+        "name": "OPEN_DRONEPORT"
+      },
+      {
+        "step_id": 3,
+        "type": "radio_command",
+        "description": "Отправить БПЛА команду DEMO_MODE (CMD=22) с координатами цели",
+        "cmd": 22,
+        "data_source": "scenario_input"
+      },
+      {
+        "step_id": 4,
+        "type": "wait_radio",
+        "description": "Мониторинг полёта. Ретранслировать TELEMETRY_SLOW (41) и TARGET (46). Ждать DEMO_RESULT (43)",
+        "expected_cmd": 43,
+        "timeout_key": "demo_result",
+        "store_as": "demo_result",
+        "relay_cmds": [41, 46]
+      },
+      {
+        "step_id": 5,
+        "type": "send_server",
+        "description": "Отправить DEMO_RESULT серверу (CMD=43)",
+        "cmd": 43,
+        "data_source": "stored:demo_result"
+      },
+      {
+        "step_id": 6,
+        "type": "wait_radio",
+        "description": "Ждать BOARDING_REQUEST (CMD=44) от БПЛА",
+        "expected_cmd": 44,
+        "timeout_key": "boarding_request"
+      },
+      {
+        "step_id": 7,
+        "type": "sub_scenario",
+        "description": "Закрыть дронпорт: лапки → LED → стол → крыша",
+        "name": "CLOSE_DRONEPORT"
+      }
+    ]
+  },
+
+  "COMBAT_MODE": {
+    "description": "Боевой режим: полный мониторинг. Ретранслируются TARGET, SOS, RETURN_DRONE",
+    "abort_on_error": true,
+    "sends_drone_comm": true,
+    "steps": [
+      {
+        "step_id": 1,
+        "type": "sub_scenario",
+        "description": "Предполётная проверка",
+        "name": "PRE_FLIGHT"
+      },
+      {
+        "step_id": 2,
+        "type": "sub_scenario",
+        "description": "Открыть дронпорт",
+        "name": "OPEN_DRONEPORT"
+      },
+      {
+        "step_id": 3,
+        "type": "radio_command",
+        "description": "Отправить БПЛА команду COMBAT_MODE (CMD=20) с координатами цели",
+        "cmd": 20,
+        "data_source": "scenario_input"
+      },
+      {
+        "step_id": 4,
+        "type": "wait_radio",
+        "description": "Мониторинг боя. Ретранслировать TELEMETRY_FAST (40), TELEMETRY_SLOW (41), TARGET (46), SOS (42), RETURN_DRONE (47). Ждать BOARDING_REQUEST (44)",
+        "expected_cmd": 44,
+        "timeout_key": "boarding_request",
+        "relay_cmds": [40, 41, 42, 43, 46, 47]
+      },
+      {
+        "step_id": 5,
+        "type": "sub_scenario",
+        "description": "Закрыть дронпорт",
+        "name": "CLOSE_DRONEPORT"
+      }
+    ]
+  },
+
+  "TARGET_INTERCEPTION": {
+    "description": "Перехват цели. Z-координата задаётся оператором с учётом высоты цели. Логика идентична COMBAT_MODE",
+    "abort_on_error": true,
+    "sends_drone_comm": true,
+    "steps": [
+      {
+        "step_id": 1,
+        "type": "sub_scenario",
+        "description": "Предполётная проверка",
+        "name": "PRE_FLIGHT"
+      },
+      {
+        "step_id": 2,
+        "type": "sub_scenario",
+        "description": "Открыть дронпорт",
+        "name": "OPEN_DRONEPORT"
+      },
+      {
+        "step_id": 3,
+        "type": "radio_command",
+        "description": "Отправить БПЛА команду TARGET_INTERCEPTION (CMD=21) с координатами перехвата",
+        "cmd": 21,
+        "data_source": "scenario_input"
+      },
+      {
+        "step_id": 4,
+        "type": "wait_radio",
+        "description": "Мониторинг. Ретранслировать TELEMETRY_FAST (40), TELEMETRY_SLOW (41), TARGET (46), SOS (42), RETURN_DRONE (47). Ждать BOARDING_REQUEST (44)",
+        "expected_cmd": 44,
+        "timeout_key": "boarding_request",
+        "relay_cmds": [40, 41, 42, 46, 47]
+      },
+      {
+        "step_id": 5,
+        "type": "sub_scenario",
+        "description": "Закрыть дронпорт",
+        "name": "CLOSE_DRONEPORT"
+      }
+    ]
+  },
+
+  "SECTOR_SEARCH": {
+    "description": "Секторный поиск. DATA: X,Y,Z + azimuth_center (uint16, 0–359°) + azimuth_width (uint8, 1–180°)",
+    "abort_on_error": true,
+    "sends_drone_comm": true,
+    "steps": [
+      {
+        "step_id": 1,
+        "type": "sub_scenario",
+        "description": "Предполётная проверка",
+        "name": "PRE_FLIGHT"
+      },
+      {
+        "step_id": 2,
+        "type": "sub_scenario",
+        "description": "Открыть дронпорт",
+        "name": "OPEN_DRONEPORT"
+      },
+      {
+        "step_id": 3,
+        "type": "radio_command",
+        "description": "Отправить БПЛА команду SECTOR_SEARCH (CMD=23): X,Y,Z + azimuth_center + azimuth_width",
+        "cmd": 23,
+        "data_source": "scenario_input"
+      },
+      {
+        "step_id": 4,
+        "type": "wait_radio",
+        "description": "Мониторинг поиска. Ретранслировать TELEMETRY_SLOW (41) и TARGET (46). Ждать BOARDING_REQUEST (44)",
+        "expected_cmd": 44,
+        "timeout_key": "boarding_request",
+        "relay_cmds": [41, 46]
+      },
+      {
+        "step_id": 5,
+        "type": "sub_scenario",
+        "description": "Закрыть дронпорт",
+        "name": "CLOSE_DRONEPORT"
+      }
+    ]
+  },
+
+  "DIAGNOSTIC_FLIGHT": {
+    "description": "Диагностический полёт: БПЛА выполняет автономный тестовый полёт и возвращается",
+    "abort_on_error": true,
+    "sends_drone_comm": true,
+    "steps": [
+      {
+        "step_id": 1,
+        "type": "sub_scenario",
+        "description": "Предполётная проверка",
+        "name": "PRE_FLIGHT"
+      },
+      {
+        "step_id": 2,
+        "type": "sub_scenario",
+        "description": "Открыть дронпорт",
+        "name": "OPEN_DRONEPORT"
+      },
+      {
+        "step_id": 3,
+        "type": "radio_command",
+        "description": "Отправить БПЛА команду DIAGNOSTIC_FLIGHT (CMD=24)",
+        "cmd": 24,
+        "data_source": null
+      },
+      {
+        "step_id": 4,
+        "type": "wait_radio",
+        "description": "Ретранслировать TELEMETRY_SLOW (41) серверу во время полёта. Ждать DIAG_RESULT (45)",
+        "expected_cmd": 45,
+        "timeout_key": "diag_result",
+        "store_as": "diag_result",
+        "relay_cmds": [41]
+      },
+      {
+        "step_id": 5,
+        "type": "send_server",
+        "description": "Отправить DIAG_RESULT серверу (CMD=45)",
+        "cmd": 45,
+        "data_source": "stored:diag_result"
+      },
+      {
+        "step_id": 6,
+        "type": "wait_radio",
+        "description": "Ждать BOARDING_REQUEST (44)",
+        "expected_cmd": 44,
+        "timeout_key": "boarding_request"
+      },
+      {
+        "step_id": 7,
+        "type": "sub_scenario",
+        "description": "Закрыть дронпорт",
+        "name": "CLOSE_DRONEPORT"
+      }
+    ]
+  },
+
+  "DRONE_FLIGHT": {
+    "description": "Перелёт между дронпортами. DATA: num_src (uint8) + num_dst (uint8) + X,Y целевого дронпорта (int32 × 10^7)",
+    "abort_on_error": true,
+    "sends_drone_comm": true,
+    "steps": [
+      {
+        "step_id": 1,
+        "type": "stm32_request",
+        "description": "Проверить num_src == собственный droneport_id. Если нет — NACK(3) и abort",
+        "system_part": 0,
+        "store_as": "self_id_check",
+        "assert_self_id": true,
+        "error_code": "UNAUTHORIZED_COMMAND"
+      },
+      {
+        "step_id": 2,
+        "type": "sub_scenario",
+        "description": "Предполётная проверка",
+        "name": "PRE_FLIGHT"
+      },
+      {
+        "step_id": 3,
+        "type": "sub_scenario",
+        "description": "Открыть дронпорт",
+        "name": "OPEN_DRONEPORT"
+      },
+      {
+        "step_id": 4,
+        "type": "radio_command",
+        "description": "Отправить БПЛА команду DRONE_FLIGHT (CMD=25): num_dst + X_dst + Y_dst",
+        "cmd": 25,
+        "data_source": "scenario_input"
+      },
+      {
+        "step_id": 5,
+        "type": "wait_radio",
+        "description": "Мониторинг перелёта. Ретранслировать TELEMETRY_SLOW (41) и RETURN_DRONE (47). Ждать BOARDING_REQUEST (44)",
+        "expected_cmd": 44,
+        "timeout_key": "drone_flight",
+        "relay_cmds": [41, 47]
+      },
+      {
+        "step_id": 6,
+        "type": "sub_scenario",
+        "description": "Закрыть стартовый дронпорт",
+        "name": "CLOSE_DRONEPORT"
+      }
+    ]
+  }
+}
