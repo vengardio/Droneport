@@ -1,0 +1,59 @@
+# ============================================
+# Аппаратная конфигурация дронпорта
+# Файл: config/hardware.yaml
+# ============================================
+
+uart_stm32:
+  port: "/dev/ttyS3"
+  baudrate: 115200
+  inter_byte_timeout_ms: 100
+  max_retries: 3
+
+usart_drone:
+  port: "/dev/ttyUSB0"
+  baudrate: 115200
+
+gps:
+  port: "/dev/ttyACM0"
+  baudrate: 9600
+
+weather_station:
+  port: "/dev/ttyUSB1"          # Arduino Nano метеостанция (CH340 USB)
+  baudrate: 115200
+
+# Таймауты ожидания после команды STM32 (секунды)
+action_timeouts:
+  open_roof:    30   # CMD 17 — PWM → ESC Hobbywing × 2 актуатора
+  close_roof:   30   # CMD 18
+  raise_table:  20   # CMD 13 — TB6600 №1 и №2 синхронно
+  lower_table:  20   # CMD 14
+  open_clamps:  8    # CMD 15 — TB6600 №2 → 1 шаговик → 4 лапки
+  close_clamps: 8    # CMD 16
+  open_vent:    8    # CMD 9  — L298N заслонки
+  close_vent:   8    # CMD 10
+  open_and_raise: 30  # CMD 22 — параллельная крыша + стол
+  default:      0    # LED, вибро, нагрев, вентиляторы — моментально
+
+# Таймауты ожидания пакетов от БПЛА (секунды)
+radio_timeouts:
+  diag_result:      20   # CMD 45 — ответ на PRE_FLIGHT
+  demo_result:      20   # CMD 43 — завершение DEMO_MODE
+  boarding_request: 20   # CMD 44 — запрос посадки
+  drone_flight:     20   # CMD 44 — завершение перелёта
+  return_receive:   20   # CMD 44 — посадка после RETURN
+
+# Таймауты USB-датчиков (секунды)
+sensor_timeouts:
+  gps_fix:     20   # Ожидание GPS фикса при PRE_FLIGHT
+  weather:     5    # Ответ метеостанции Arduino (UART, быстрый)
+
+# Пороговые значения
+thresholds:
+  battery_min_voltage:      11.0   # В. Ниже → BATTERY_LOW
+  battery_critical_voltage: 9.5    # В. Ниже → BATTERY_CRITICAL
+  vibro_temp_threshold:     -10.0  # °C. Ниже → включать вибромоторы
+  vibro_interval_sec:       1800   # 30 мин между включениями
+  vibro_duration_sec:       10     # Длительность одного включения
+# Заглушки для отладки без железа
+stubs:
+  radio_link: true   # true = не падать если /dev/ttyUSB0 нет
