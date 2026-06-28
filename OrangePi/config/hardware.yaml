@@ -11,7 +11,7 @@ uart_stm32:
 
 usart_drone:
   port: "/dev/ttyUSB0"
-  baudrate: 115200
+  baudrate: 420000
 
 gps:
   port: "/dev/ttyACM0"
@@ -36,9 +36,7 @@ action_timeouts:
 
 # Таймауты ожидания пакетов от БПЛА (секунды)
 radio_timeouts:
-  diag_result:      20   # CMD 45 — ответ на PRE_FLIGHT
-  demo_result:      20   # CMD 43 — завершение DEMO_MODE
-  boarding_request: 20   # CMD 44 — запрос посадки
+  boarding_request: 20   # CMD 44 — запрос посадки (все сценарии полёта)
   drone_flight:     20   # CMD 44 — завершение перелёта
   return_receive:   20   # CMD 44 — посадка после RETURN
 

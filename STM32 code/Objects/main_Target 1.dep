@@ -1,61 +1,0 @@
-Dependencies for Project 'main', Target 'Target 1': (DO NOT MODIFY !)
-CompilerVersion: 6220000::V6.22::ARMCLANG
-F (.\rcc.h)(0x69D1E288)()
-F (.\rcc.c)(0x69D1E1B5)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Users/Mi/AppData/Local/Arm/Packs/ARM/CMSIS/6.2.0/CMSIS/Core/Include-IC:/Users/Mi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.4.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="540" -DSTM32F401xC -D_RTE_-o ./objects/rcc.o -MMD)
-I (rcc.h)(0x69D1E288)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f401xc.h)(0x6938B7FD)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\ARM\CMSIS\6.2.0\CMSIS\Core\Include\core_cm4.h)(0x6938B560)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x6938B7FD)
-F (.\main.c)(0x6A0888E7)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Users/Mi/AppData/Local/Arm/Packs/ARM/CMSIS/6.2.0/CMSIS/Core/Include-IC:/Users/Mi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.4.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="540" -DSTM32F401xC -D_RTE_-o ./objects/main.o -MMD)
-I (main.h)(0x6A0888A5)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f401xc.h)(0x6938B7FD)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\ARM\CMSIS\6.2.0\CMSIS\Core\Include\core_cm4.h)(0x6938B560)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x6938B7FD)
-I (rcc.h)(0x69D1E288)
-I (gpio.h)(0x69C2E9C2)
-I (usart1.h)(0x69C3F390)
-I (pwm.h)(0x69C2E9C2)
-I (adc.h)(0x69C2E9C2)
-I (dht22.h)(0x69C2E9C1)
-F (.\main.h)(0x6A0888A5)()
-F (.\gpio.c)(0x6A05F40D)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Users/Mi/AppData/Local/Arm/Packs/ARM/CMSIS/6.2.0/CMSIS/Core/Include-IC:/Users/Mi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.4.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="540" -DSTM32F401xC -D_RTE_-o ./objects/gpio.o -MMD)
-I (gpio.h)(0x69C2E9C2)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f401xc.h)(0x6938B7FD)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\ARM\CMSIS\6.2.0\CMSIS\Core\Include\core_cm4.h)(0x6938B560)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x6938B7FD)
-F (.\gpio.h)(0x69C2E9C2)()
-F (.\usart1.c)(0x69C71FE9)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Users/Mi/AppData/Local/Arm/Packs/ARM/CMSIS/6.2.0/CMSIS/Core/Include-IC:/Users/Mi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.4.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="540" -DSTM32F401xC -D_RTE_-o ./objects/usart1.o -MMD)
-I (usart1.h)(0x69C3F390)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f401xc.h)(0x6938B7FD)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\ARM\CMSIS\6.2.0\CMSIS\Core\Include\core_cm4.h)(0x6938B560)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x6938B7FD)
-F (.\usart1.h)(0x69C3F390)()
-F (.\pwm.c)(0x69D1E8BA)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Users/Mi/AppData/Local/Arm/Packs/ARM/CMSIS/6.2.0/CMSIS/Core/Include-IC:/Users/Mi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.4.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="540" -DSTM32F401xC -D_RTE_-o ./objects/pwm.o -MMD)
-I (pwm.h)(0x69C2E9C2)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f401xc.h)(0x6938B7FD)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\ARM\CMSIS\6.2.0\CMSIS\Core\Include\core_cm4.h)(0x6938B560)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x6938B7FD)
-F (.\pwm.h)(0x69C2E9C2)()
-F (.\adc.c)(0x69C71DFC)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Users/Mi/AppData/Local/Arm/Packs/ARM/CMSIS/6.2.0/CMSIS/Core/Include-IC:/Users/Mi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.4.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="540" -DSTM32F401xC -D_RTE_-o ./objects/adc.o -MMD)
-I (adc.h)(0x69C2E9C2)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f401xc.h)(0x6938B7FD)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\ARM\CMSIS\6.2.0\CMSIS\Core\Include\core_cm4.h)(0x6938B560)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x6938B7FD)
-F (.\adc.h)(0x69C2E9C2)()
-F (.\dht22.h)(0x69C2E9C1)()
-F (.\dht22.c)(0x69C76589)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Users/Mi/AppData/Local/Arm/Packs/ARM/CMSIS/6.2.0/CMSIS/Core/Include-IC:/Users/Mi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.4.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="540" -DSTM32F401xC -D_RTE_-o ./objects/dht22.o -MMD)
-I (dht22.h)(0x69C2E9C1)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f401xc.h)(0x6938B7FD)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\ARM\CMSIS\6.2.0\CMSIS\Core\Include\core_cm4.h)(0x6938B560)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x6938B7FD)
-I (rcc.h)(0x69D1E288)
-F (.\led_blink.c)(0x69F34E7E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Users/Mi/AppData/Local/Arm/Packs/ARM/CMSIS/6.2.0/CMSIS/Core/Include-IC:/Users/Mi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.4.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="540" -DSTM32F401xC -D_RTE_-o ./objects/led_blink.o -MMD)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f401xc.h)(0x6938B7FD)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\ARM\CMSIS\6.2.0\CMSIS\Core\Include\core_cm4.h)(0x6938B560)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x6938B7FD)
-F (RTE/Device/STM32F401CCUx/startup_stm32f401xc.s)(0x69C2E9C1)(--target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -masm=auto  -Wa,armasm,--diag_suppress=A1950W -c-gdwarf-4 -Wa,armasm,--pd,"__EVAL SETA 1"-I./RTE/_Target_1-IC:/Users/Mi/AppData/Local/Arm/Packs/ARM/CMSIS/6.2.0/CMSIS/Core/Include-IC:/Users/Mi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.4.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-Wa,armasm,--pd,"__UVISION_VERSION SETA 540" -Wa,armasm,--pd,"STM32F401xC SETA 1" -Wa,armasm,--pd,"_RTE_ SETA 1"-o ./objects/startup_stm32f401xc.o)
-F (RTE/Device/STM32F401CCUx/system_stm32f4xx.c)(0x69C2E9C1)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wall -Wextra -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Users/Mi/AppData/Local/Arm/Packs/ARM/CMSIS/6.2.0/CMSIS/Core/Include-IC:/Users/Mi/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.4.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="540" -DSTM32F401xC -D_RTE_-o ./objects/system_stm32f4xx.o -MMD)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x6938B7FD)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f401xc.h)(0x6938B7FD)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\ARM\CMSIS\6.2.0\CMSIS\Core\Include\core_cm4.h)(0x6938B560)
-I (C:\Users\Mi\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.4.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x6938B7FD)
