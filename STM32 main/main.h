@@ -29,7 +29,7 @@ void LedBlink_Init(void);
 // Ограничения
 #define MAX_DATA_LEN            100    // Макс. длина поля DATA
 #define MAX_MESSAGE_LENGTH      (MAX_DATA_LEN + 5)  // BYTE_START + TYPE + LEN + DATA + CRC + BYTE_END
-#define BUFFER_LENGTH           10
+#define BUFFER_LENGTH           255
 #define INTER_BYTE_TIMEOUT_US   100000 // 100 мс межбайтовый таймаут (в мкс)
 #define PWM_MIN 1000
 #define PWM_CENTER 1500
@@ -70,11 +70,11 @@ void LedBlink_Init(void);
 #define ROOF_SHUTTERS_CLOSE_TIMEOUT      29000      // мс — закрытие крыши
 
 // Буферы сообщений
-uint8_t msg_tx[MAX_MESSAGE_LENGTH];
-uint8_t msg_rx[BUFFER_LENGTH][MAX_MESSAGE_LENGTH];
-uint8_t start_msg_index  = 0;
-uint8_t last_msg_index   = 0;
-uint8_t msg_byte_index   = 0;
+uint8_t          msg_tx[MAX_MESSAGE_LENGTH];
+volatile uint8_t msg_rx[BUFFER_LENGTH][MAX_MESSAGE_LENGTH];
+volatile uint8_t start_msg_index = 0;
+volatile uint8_t last_msg_index  = 0;
+volatile uint8_t msg_byte_index  = 0;
 bool    isClimatic       = 0;
 
 // Таймаут между байтами: обновляется в IRQ, проверяется в main

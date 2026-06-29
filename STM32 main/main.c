@@ -3,11 +3,11 @@
 #include "stdint.h"
 #include "stdio.h"
 
-extern uint8_t  msg_tx[MAX_MESSAGE_LENGTH];
-extern uint8_t  msg_rx[BUFFER_LENGTH][MAX_MESSAGE_LENGTH];
-extern uint8_t  start_msg_index;
-extern uint8_t  last_msg_index;
-extern uint8_t  msg_byte_index;
+extern uint8_t          msg_tx[MAX_MESSAGE_LENGTH];
+extern volatile uint8_t msg_rx[BUFFER_LENGTH][MAX_MESSAGE_LENGTH];
+extern volatile uint8_t start_msg_index;
+extern volatile uint8_t last_msg_index;
+extern volatile uint8_t msg_byte_index;
 extern bool     isClimatic;
 extern volatile uint32_t last_byte_tick;
 extern volatile bool     rx_in_progress;

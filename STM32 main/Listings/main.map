@@ -490,19 +490,19 @@ Image Symbol Table
     [Anonymous Symbol]                       0x080011f4   Section        0  main.o(.text.main)
     [Anonymous Symbol]                       0x0800142c   Section        0  main.o(.text.makeSteps)
     [Anonymous Symbol]                       0x08001548   Section        0  main.o(.text.read_message)
-    runStepProfile                           0x08001d51   Thumb Code   404  main.o(.text.runStepProfile)
-    [Anonymous Symbol]                       0x08001d50   Section        0  main.o(.text.runStepProfile)
-    [Anonymous Symbol]                       0x08001ee4   Section        0  main.o(.text.send_ack)
-    [Anonymous Symbol]                       0x08001ef4   Section        0  main.o(.text.send_nack_with_error)
-    [Anonymous Symbol]                       0x08001f20   Section        0  main.o(.text.send_packet)
-    $v0                                      0x08001fac   Number         0  fpinit.o(x$fpl$fpinit)
-    x$fpl$fpinit                             0x08001fac   Section       26  fpinit.o(x$fpl$fpinit)
+    runStepProfile                           0x08001d55   Thumb Code   404  main.o(.text.runStepProfile)
+    [Anonymous Symbol]                       0x08001d54   Section        0  main.o(.text.runStepProfile)
+    [Anonymous Symbol]                       0x08001ee8   Section        0  main.o(.text.send_ack)
+    [Anonymous Symbol]                       0x08001ef8   Section        0  main.o(.text.send_nack_with_error)
+    [Anonymous Symbol]                       0x08001f24   Section        0  main.o(.text.send_packet)
+    $v0                                      0x08001fb0   Number         0  fpinit.o(x$fpl$fpinit)
+    x$fpl$fpinit                             0x08001fb0   Section       26  fpinit.o(x$fpl$fpinit)
     .bss                                     0x20000000   Section       96  libspace.o(.bss)
-    Heap_Mem                                 0x20000488   Data         512  startup_stm32f401xc.o(HEAP)
-    HEAP                                     0x20000488   Section      512  startup_stm32f401xc.o(HEAP)
-    Stack_Mem                                0x20000688   Data        1024  startup_stm32f401xc.o(STACK)
-    STACK                                    0x20000688   Section     1024  startup_stm32f401xc.o(STACK)
-    __initial_sp                             0x20000a88   Data           0  startup_stm32f401xc.o(STACK)
+    Heap_Mem                                 0x20006908   Data         512  startup_stm32f401xc.o(HEAP)
+    HEAP                                     0x20006908   Section      512  startup_stm32f401xc.o(HEAP)
+    Stack_Mem                                0x20006b08   Data        1024  startup_stm32f401xc.o(STACK)
+    STACK                                    0x20006b08   Section     1024  startup_stm32f401xc.o(STACK)
+    __initial_sp                             0x20006f08   Data           0  startup_stm32f401xc.o(STACK)
 
     Global Symbols
 
@@ -690,15 +690,15 @@ Image Symbol Table
     getMicros                                0x080011e9   Thumb Code    10  rcc.o(.text.getMicros)
     main                                     0x080011f5   Thumb Code   568  main.o(.text.main)
     makeSteps                                0x0800142d   Thumb Code   284  main.o(.text.makeSteps)
-    read_message                             0x08001549   Thumb Code  2056  main.o(.text.read_message)
-    send_ack                                 0x08001ee5   Thumb Code    14  main.o(.text.send_ack)
-    send_nack_with_error                     0x08001ef5   Thumb Code    42  main.o(.text.send_nack_with_error)
-    send_packet                              0x08001f21   Thumb Code   140  main.o(.text.send_packet)
-    _fp_init                                 0x08001fad   Thumb Code    26  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x08001fc5   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x08001fc5   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    Region$$Table$$Base                      0x08001fc8   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08001fd8   Number         0  anon$$obj.o(Region$$Table)
+    read_message                             0x08001549   Thumb Code  2058  main.o(.text.read_message)
+    send_ack                                 0x08001ee9   Thumb Code    14  main.o(.text.send_ack)
+    send_nack_with_error                     0x08001ef9   Thumb Code    42  main.o(.text.send_nack_with_error)
+    send_packet                              0x08001f25   Thumb Code   140  main.o(.text.send_packet)
+    _fp_init                                 0x08001fb1   Thumb Code    26  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x08001fc9   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x08001fc9   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    Region$$Table$$Base                      0x08001fcc   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08001fdc   Number         0  anon$$obj.o(Region$$Table)
     __libspace_start                         0x20000000   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x20000060   Data           0  libspace.o(.bss)
     emergency_stop                           0x20000060   Data           1  main.o(.bss.emergency_stop)
@@ -706,9 +706,9 @@ Image Symbol Table
     last_byte_tick                           0x20000064   Data           4  main.o(.bss.last_byte_tick)
     last_msg_index                           0x20000068   Data           1  main.o(.bss.last_msg_index)
     msg_byte_index                           0x20000069   Data           1  main.o(.bss.msg_byte_index)
-    msg_rx                                   0x2000006a   Data        1050  main.o(.bss.msg_rx)
-    rx_in_progress                           0x20000484   Data           1  main.o(.bss.rx_in_progress)
-    start_msg_index                          0x20000485   Data           1  main.o(.bss.start_msg_index)
+    msg_rx                                   0x2000006a   Data       26775  main.o(.bss.msg_rx)
+    rx_in_progress                           0x20006901   Data           1  main.o(.bss.rx_in_progress)
+    start_msg_index                          0x20006902   Data           1  main.o(.bss.start_msg_index)
 
 
 
@@ -718,9 +718,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000219
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x00001fd8, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x08000000, Size: 0x00001fdc, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001fd8, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001fdc, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -834,40 +834,41 @@ Memory Map of the image
     0x080011f2   0x080011f2   0x00000002   PAD
     0x080011f4   0x080011f4   0x00000238   Code   RO           79    .text.main          main.o
     0x0800142c   0x0800142c   0x0000011c   Code   RO           71    .text.makeSteps     main.o
-    0x08001548   0x08001548   0x00000808   Code   RO           75    .text.read_message  main.o
-    0x08001d50   0x08001d50   0x00000194   Code   RO           73    .text.runStepProfile  main.o
-    0x08001ee4   0x08001ee4   0x0000000e   Code   RO           65    .text.send_ack      main.o
-    0x08001ef2   0x08001ef2   0x00000002   PAD
-    0x08001ef4   0x08001ef4   0x0000002a   Code   RO           67    .text.send_nack_with_error  main.o
-    0x08001f1e   0x08001f1e   0x00000002   PAD
-    0x08001f20   0x08001f20   0x0000008c   Code   RO           63    .text.send_packet   main.o
-    0x08001fac   0x08001fac   0x0000001a   Code   RO          273    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x08001fc6   0x08001fc6   0x00000002   PAD
-    0x08001fc8   0x08001fc8   0x00000010   Data   RO          348    Region$$Table       anon$$obj.o
+    0x08001548   0x08001548   0x0000080a   Code   RO           75    .text.read_message  main.o
+    0x08001d52   0x08001d52   0x00000002   PAD
+    0x08001d54   0x08001d54   0x00000194   Code   RO           73    .text.runStepProfile  main.o
+    0x08001ee8   0x08001ee8   0x0000000e   Code   RO           65    .text.send_ack      main.o
+    0x08001ef6   0x08001ef6   0x00000002   PAD
+    0x08001ef8   0x08001ef8   0x0000002a   Code   RO           67    .text.send_nack_with_error  main.o
+    0x08001f22   0x08001f22   0x00000002   PAD
+    0x08001f24   0x08001f24   0x0000008c   Code   RO           63    .text.send_packet   main.o
+    0x08001fb0   0x08001fb0   0x0000001a   Code   RO          273    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x08001fca   0x08001fca   0x00000002   PAD
+    0x08001fcc   0x08001fcc   0x00000010   Data   RO          348    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08001fd8, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08001fdc, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
 
-    Execution Region ER_ZI (Exec base: 0x20000000, Load base: 0x08001fd8, Size: 0x00000a88, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000000, Load base: 0x08001fdc, Size: 0x00006f08, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000000        -       0x00000060   Zero   RW          213    .bss                c_w.l(libspace.o)
     0x20000060        -       0x00000001   Zero   RW           93    .bss.emergency_stop  main.o
     0x20000061        -       0x00000001   Zero   RW           90    .bss.isClimatic     main.o
-    0x20000062   0x08001fd8   0x00000002   PAD
+    0x20000062   0x08001fdc   0x00000002   PAD
     0x20000064        -       0x00000004   Zero   RW           91    .bss.last_byte_tick  main.o
     0x20000068        -       0x00000001   Zero   RW           88    .bss.last_msg_index  main.o
     0x20000069        -       0x00000001   Zero   RW           89    .bss.msg_byte_index  main.o
-    0x2000006a        -       0x0000041a   Zero   RW           94    .bss.msg_rx         main.o
-    0x20000484        -       0x00000001   Zero   RW           92    .bss.rx_in_progress  main.o
-    0x20000485        -       0x00000001   Zero   RW           87    .bss.start_msg_index  main.o
-    0x20000486   0x08001fd8   0x00000002   PAD
-    0x20000488        -       0x00000200   Zero   RW          159    HEAP                startup_stm32f401xc.o
-    0x20000688        -       0x00000400   Zero   RW          158    STACK               startup_stm32f401xc.o
+    0x2000006a        -       0x00006897   Zero   RW           94    .bss.msg_rx         main.o
+    0x20006901        -       0x00000001   Zero   RW           92    .bss.rx_in_progress  main.o
+    0x20006902        -       0x00000001   Zero   RW           87    .bss.start_msg_index  main.o
+    0x20006903   0x08001fdc   0x00000005   PAD
+    0x20006908        -       0x00000200   Zero   RW          159    HEAP                startup_stm32f401xc.o
+    0x20006b08        -       0x00000400   Zero   RW          158    STACK               startup_stm32f401xc.o
 
 
 ==============================================================================
@@ -881,7 +882,7 @@ Image component sizes
        876          8          0          0          0       3397   dht22.o
        206          0          0          0          0       1602   gpio.o
        212          0          0          0          0       4468   led_blink.o
-      4498         86          0          0       1060       7945   main.o
+      4500         86          0          0      26785       7953   main.o
        324          0          0          0          0       2638   pwm.o
        518          0          0          0          0       2761   rcc.o
         64         26        404          0       1536        896   startup_stm32f401xc.o
@@ -889,9 +890,9 @@ Image component sizes
        364          0          0          0          0       4578   usart1.o
 
     ----------------------------------------------------------------------
-      7448        120        420          0       2600      33111   Object Totals
+      7452        120        420          0      28328      33119   Object Totals
          0          0         16          0          0          0   (incl. Generated)
-        40          0          0          0          4          0   (incl. Padding)
+        42          0          0          0          7          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -939,15 +940,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      7732        136        420          0       2696      33427   Grand Totals
-      7732        136        420          0       2696      33427   ELF Image Totals
-      7732        136        420          0          0          0   ROM Totals
+      7736        136        420          0      28424      33435   Grand Totals
+      7736        136        420          0      28424      33435   ELF Image Totals
+      7736        136        420          0          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 8152 (   7.96kB)
-    Total RW  Size (RW Data + ZI Data)              2696 (   2.63kB)
-    Total ROM Size (Code + RO Data + RW Data)       8152 (   7.96kB)
+    Total RO  Size (Code + RO Data)                 8156 (   7.96kB)
+    Total RW  Size (RW Data + ZI Data)             28424 (  27.76kB)
+    Total ROM Size (Code + RO Data + RW Data)       8156 (   7.96kB)
 
 ==============================================================================
 
